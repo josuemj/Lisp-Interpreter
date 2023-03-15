@@ -2,8 +2,6 @@ import java.util.Stack;
 
 public class Aritmetica {
 
-
-
     /**
      * Metodo identifica si es una operacion
      * @param operator
@@ -24,6 +22,7 @@ public class Aritmetica {
      */
 
     public static int evaluatePrefix(String PrefixExpression){
+        //System.out.println("EVALUATING THE PREFIX EXPRESSION:"+PrefixExpression);
         String[] tokens = PrefixExpression.split("\\s+");
 
         //Stack for operands
@@ -32,6 +31,7 @@ public class Aritmetica {
         // Iterate through the tokens from right to left
         for (int i = tokens.length - 1; i >= 0; i--) {
             String token = tokens[i];
+            //System.out.println(token);
 
             if (Character.isDigit(token.charAt(0))) {
                 stack.push(Integer.parseInt(token));
@@ -62,6 +62,4 @@ public class Aritmetica {
         return stack.pop();
         //Result
     }
-
-
 }

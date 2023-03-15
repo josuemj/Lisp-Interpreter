@@ -9,14 +9,14 @@ public class Interpreter {
             String codeLine = fullCode.get(i);
             System.out.println("Line: "+codeLine);
 
-            if(isAritmetical(codeLine)){
+            //All code detections
+            if(isAritmetical(codeLine)){ //Aritmetical detector
                 System.out.println("ARITMETICAL OPERATION DETECTED");
                 //Function call to operate de code line
-
                 System.out.println(Aritmetica.evaluatePrefix(codeLine.substring(1,codeLine.length()-1)));
-            }else {
-                System.out.println("NO OPERATION DETECTED");
             }
+
+
 
 
         }
