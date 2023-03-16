@@ -4,3 +4,5 @@
 (atom 34)
 (atom 'dsds)
 (atom '(1 33 4))
+(list 'hola' 'mundo' (1 2 3))
+(equal "Hello" "Hello")

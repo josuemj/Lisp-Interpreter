@@ -6,10 +6,12 @@ public class Predicates {
      * @return
      */
     public static boolean isPredicate(String codeLine){
+
         if (codeLine.contains("atom") || codeLine.contains("list") || codeLine.contains("equal") || codeLine.contains(">") || codeLine.contains("<")){
             return true;
         }
         return false;
+
     }
 
     /**
@@ -23,27 +25,22 @@ public class Predicates {
 
             System.out.println("RUNNING ATOM FUNCTION");
             try{
-
                 String variable = predicate.substring(6,predicate.length()-1);
-                System.out.println("VARIABLE ANALYSIS:"+variable);
+                System.out.println("VARIABLE ANALYSIS:"+variable);//??????
                 isAtom(variable);
-
-
             } catch (Exception e){
                 System.out.println("SYNTAX ERROR");
             }
-
-
             //Run atom method
 
         }else if(predicate.contains("list")){
             System.out.println("LIST DETETECTED");//?????????
-
+            isList(predicate);
             //List method to run
 
         } else if (predicate.contains("equal")){
             System.out.println("EQUAL EXPRESSION");//?????????
-
+            runEqual(predicate);
             //Equal method to run
 
         }else if(predicate.contains(">")){
@@ -68,6 +65,8 @@ public class Predicates {
      * ;; Boolean values
      * t lisp
      * nil
+     * So atom function return T (true) if the given argument is an atom
+     * and returns NIL (false) if the argument isa list
      * @param atomPredicate
      * @return
      */
@@ -145,5 +144,52 @@ public class Predicates {
         System.out.println("SYNTAX ERROR INVALID ARGUMENT");
         return false;
     }
+
+    /**
+     * In Lisp, the list function is used to create a new list.
+     * It takes any number of arguments and returns a new list
+     * containing those arguments.
+     * @param listDeclaration
+     * @return
+     */
+
+    public static boolean isList(String listDeclaration){
+        System.out.println("ANALYZING LIST");//???????
+        System.out.println(listDeclaration);//????????
+        try{
+            String postList = listDeclaration.substring(6,listDeclaration.length()-1);
+            System.out.println(postList); //???????
+            String[] lista = postList.split(" ");
+
+        }catch (Exception li){
+            System.out.println("LIST SYNTAX ERROR");
+        }
+
+
+        return false;
+    }
+
+    public static void runEqual(String codeLine){
+        try{
+
+            String expression = codeLine.substring(7,codeLine.length()-1);
+            System.out.println("Expressions: "+expression);
+
+            String[] variables = expression.split(" ");
+
+            String cond1 = variables[0];
+            String cond2 = variables[1];
+
+            if (cond2.equals(cond1)){
+                System.out.println("T");
+            }else {
+                System.out.println("NIL");
+            }
+
+        }catch (Exception i){
+            System.out.println("INVALID COMPARATION GIVEN");
+        }
+    }
+
 
 }

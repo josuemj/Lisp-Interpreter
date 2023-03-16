@@ -26,14 +26,9 @@ public class Interpreter {
             //Predicate line detection
             if(Predicates.isPredicate(codeLine)){
                 System.out.println("Predicate detected");
-
                 Predicates.runPredicate(codeLine);
             }
             System.out.println("-----------------\n");
-
-
-
-
         }
 
     }
