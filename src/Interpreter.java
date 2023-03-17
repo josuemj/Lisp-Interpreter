@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Interpreter {
 
@@ -6,7 +7,9 @@ public class Interpreter {
      * Lee linea por linea para detectar la funcion o tarea a realizar
      * @param fullCode
      */
-
+    private static Stack<String> stack = new Stack<String>();
+    private static ArrayList<String> defunLines = new ArrayList<>();
+    private static boolean defunDetected = false;
     public static void mainDecoder(ArrayList<String> fullCode){
 
         //Reading line by line
@@ -16,19 +19,57 @@ public class Interpreter {
             String codeLine = fullCode.get(i);
             System.out.println("Line: "+codeLine);
 
-            //Arithmetical line detection
-            if(isAritmetical(codeLine)){ //Arithmetical detector
-                System.out.println("ARITMETICAL OPERATION DETECTED");
-                //Function call to operate de code line
-                System.out.println(Aritmetica.evaluatePrefix(codeLine.substring(1,codeLine.length()-1)));
+            //Defun line detection
+            if(Defun.isDefun(codeLine) || defunDetected) {
+                System.out.println("DEFUN LINE DETECTED");
+                defunDetected = true;
+                String[] codeChars = codeLine.split("");
+                for (String st : codeChars) {
+                    if (st.equals("(")){
+                        stack.push(st);
+                    } else if (st.equals(")")){
+                        try {
+                            stack.pop();
+                        } catch (Exception e) {
+                            System.out.println("SYNTAX ERROR INVALID ARGUMENT");
+                            defunDetected = false;
+                        }
+                    }
+                }
+                if(!stack.isEmpty()){
+                    defunLines.add(codeLine);
+                } else{
+                    defunLines.add(codeLine);
+                    Defun.saveDefun(defunLines);
+                    defunDetected=false;
+                    System.out.println(" --FUNCTION SAVED--");
+                    System.out.println("-----------------\n");
+                }
+            } else{
+                //ALREADY DEFINED FUNCTION DETECTED
+                if(Defun.isFunction(codeLine)){
+                    System.out.println("ALREADY DEFINED FUNCTION DETECTED");
+                    if(codeLine.split(" ").length>1){
+                        Defun.runFunction(codeLine);
+                    } else{
+                        Defun.runFunctionNP(codeLine);
+                    }
+                }
+                //Arithmetical line detection
+                if(isAritmetical(codeLine)){ //Arithmetical detector
+                    System.out.println("ARITMETICAL OPERATION DETECTED");
+                    //Function call to operate de code line
+                    System.out.println(Aritmetica.evaluatePrefix(codeLine.substring(1,codeLine.length()-1)));
+                }
+
+                //Predicate line detection
+                if(Predicates.isPredicate(codeLine)){
+                    System.out.println("Predicate detected");
+                    Predicates.runPredicate(codeLine);
+                }
+                System.out.println("-----------------\n");
             }
 
-            //Predicate line detection
-            if(Predicates.isPredicate(codeLine)){
-                System.out.println("Predicate detected");
-                Predicates.runPredicate(codeLine);
-            }
-            System.out.println("-----------------\n");
         }
 
     }
