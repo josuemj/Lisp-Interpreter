@@ -1,15 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main{
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> codigo = Reader.Read(); //Array structure to save all code lines
+        Interpreter.mainDecoder(codigo); // Interpreter will receive all code
 
-        System.out.println("Ingrese la expresión prefix para evaluar: ");
-        String prefixExpression = scanner.nextLine();
-
-        int result = Aritmetica.evaluatePrefix(prefixExpression);
-        System.out.println("El resultado de la evaluación es: " + result);
-
-        scanner.close();
     }
 }
