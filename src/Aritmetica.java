@@ -2,7 +2,7 @@ import java.util.Stack;
 
 public class Aritmetica {
 
-    private static Variables Variables = new Variables();
+    public static Variables Variables = new Variables();
 
     /**
      * Metodo identifica si es una operacion
@@ -22,7 +22,7 @@ public class Aritmetica {
      * @param PrefixExpression
      * @return resuklt int
      */
-    public static int evaluatePrefix(String PrefixExpression){
+    public int evaluatePrefix(String PrefixExpression){
         //System.out.println("EVALUATING THE PREFIX EXPRESSION:"+PrefixExpression);
         String[] tokens = PrefixExpression.split("\\s+");
 
@@ -107,7 +107,7 @@ public class Aritmetica {
      * @return el valor resultante de la evaluación de la condición
      * @throws IllegalArgumentException si la expresión no es válida
      */
-    public static int evaluateConditional(String expression) {
+    public int evaluateConditional(String expression) {
         String[] tokens = expression.split("\\s+");
         if (tokens.length < 2) {
             throw new IllegalArgumentException("Invalid conditional expression: " + expression);
@@ -129,5 +129,31 @@ public class Aritmetica {
                 throw new IllegalArgumentException("Invalid operator in conditional expression: " + operator);
         }
     }
+
+    public double evaluatePrefixCond(String expr) {
+        String[] tokens = expr.trim().split("\\s+");
+        String operator = tokens[0];
+    
+        if (isOperator(operator)) {
+            double operand1 = evaluatePrefixCond(tokens[1]);
+            double operand2 = evaluatePrefixCond(tokens[2]);
+    
+            switch (operator) {
+                case "+":
+                    return operand1 + operand2;
+                case "-":
+                    return operand1 - operand2;
+                case "*":
+                    return operand1 * operand2;
+                case "/":
+                    return operand1 / operand2;
+                default:
+                    throw new IllegalArgumentException("Invalid operator: " + operator);
+            }
+        } else {
+            return Double.parseDouble(expr);
+        }
+    }
+    
 }
 

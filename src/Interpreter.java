@@ -3,6 +3,7 @@ import java.util.Stack;
 
 public class Interpreter {
 
+    public static Aritmetica Aritmetica = new Aritmetica();
     /**
      * Lee linea por linea para detectar la funcion o tarea a realizar
      * @param fullCode
@@ -11,6 +12,7 @@ public class Interpreter {
     private static ArrayList<String> defunLines = new ArrayList<>();
     private static boolean defunDetected = false;
     public static void mainDecoder(ArrayList<String> fullCode){
+    
 
         //Reading line by line
         for (int i = 0;i<fullCode.size();i++){
@@ -68,21 +70,30 @@ public class Interpreter {
                     Predicates.runPredicate(codeLine);
                 }
                 System.out.println("-----------------\n");
+
+
+                //Empezar el código para cond
+                
             }
-
-
+            //
             //Empizan las vainas de setq
             if(setq.isSetq(codeLine)){ // Setq detector
                 System.out.println("SETQ DETECTADO");
                 setq.runSetq(codeLine);
 
             }
+            //termina
+
+            //Empiezan las vainas de getVariables
+            
+            //termina
 
         }
 
         
 
     }
+    
 
     /**
      *Metodo verifica si se trata de una operacion aritmetica
@@ -92,6 +103,7 @@ public class Interpreter {
      */
 
     public static boolean isAritmetical(String codeLine){
+
         String possibleOp = String.valueOf(codeLine.charAt(1));
         if(Aritmetica.isOperator(possibleOp)){
             return true;

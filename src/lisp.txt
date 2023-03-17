@@ -1,5 +1,7 @@
+(+ 2 5)
 (defun example (x y z)
  (+ x y)
  (* y z))
 (example 2 5 6)
 (setq x 1)
+(cond (> 1 0) => (+ 2 5))
