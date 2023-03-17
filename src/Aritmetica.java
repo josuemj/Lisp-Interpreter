@@ -2,7 +2,7 @@ import java.util.Stack;
 
 public class Aritmetica {
 
-    private static setq variables = new setq();
+    private static Variables Variables = new Variables();
 
     /**
      * Metodo identifica si es una operacion
@@ -39,7 +39,7 @@ public class Aritmetica {
             }
 
             else if (token.startsWith("$")) {
-                Object value = variables.getVariable(token.substring(1));
+                Object value = Variables.getVariable(token.substring(1));
                 if (value == null) {
                     throw new IllegalArgumentException("Variable not defined: " + token);
                 }
@@ -71,7 +71,7 @@ public class Aritmetica {
             else if (token.equals("SETQ")) {
                 String variableName = tokens[i - 1];
                 Object value = stack.pop();
-                variables.setVariable(variableName, value);
+                Variables.setVariable(variableName, value);
                 i--; // Skip the variable name in the next iteration
             }
 

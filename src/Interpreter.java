@@ -70,7 +70,17 @@ public class Interpreter {
                 System.out.println("-----------------\n");
             }
 
+
+            //Empizan las vainas de setq
+            if(setq.isSetq(codeLine)){ // Setq detector
+                System.out.println("SETQ DETECTADO");
+                setq.runSetq(codeLine);
+
+            }
+
         }
+
+        
 
     }
 
