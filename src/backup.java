@@ -1,4 +1,5 @@
 //Cond line detection
+/*
 if(codeLine.contains("cond")){ 
     System.out.println("COND DETECTED");
     ArrayList<String> condLines = new ArrayList<String>();
@@ -22,4 +23,4 @@ if(codeLine.contains("cond")){
             System.out.println("ERROR: INVALID COND CLAUSE");
         }
     }
-}
+}*/

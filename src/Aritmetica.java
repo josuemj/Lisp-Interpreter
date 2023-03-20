@@ -22,7 +22,7 @@ public class Aritmetica {
      * @param PrefixExpression
      * @return resuklt int
      */
-    public int evaluatePrefix(String PrefixExpression){
+    public static int evaluatePrefix(String PrefixExpression){
         //System.out.println("EVALUATING THE PREFIX EXPRESSION:"+PrefixExpression);
         String[] tokens = PrefixExpression.split("\\s+");
 
@@ -107,7 +107,7 @@ public class Aritmetica {
      * @return el valor resultante de la evaluación de la condición
      * @throws IllegalArgumentException si la expresión no es válida
      */
-    public int evaluateConditional(String expression) {
+    public static int evaluateConditional(String expression) {
         String[] tokens = expression.split("\\s+");
         if (tokens.length < 2) {
             throw new IllegalArgumentException("Invalid conditional expression: " + expression);

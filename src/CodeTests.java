@@ -4,7 +4,7 @@
  */
 
 public class CodeTests {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String word = "sdsd  dsds  sdsss ";
         System.out.println(word.replace(" ", ""));
         String prefixExpression = "/ 1 5 6";
@@ -13,7 +13,7 @@ public class CodeTests {
         System.out.println(result);
         System.out.println(eval);
 
-    }
+    }*/
 }
 
 

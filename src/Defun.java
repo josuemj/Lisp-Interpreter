@@ -74,7 +74,6 @@ public class Defun {
         String[] instance = codeLine.split(" ");
         String[] parameterNames = exe.get(0).split(" ");
         for (int i = 1; i<instance.length; i++){
-
             if (i==instance.length-1){
                 instance[i] = instance[i].substring(0, instance[i].length() - 1);
             }
@@ -88,8 +87,7 @@ public class Defun {
         for (int i = 0; i<exe.size(); i++){
             for(int j = 0; j<parameterNum; j++){
                 if(exe.get(i).contains(parameters[j][0])){
-                    String tem = exe.get(i).replace(parameters[j][0].charAt(0),parameters[j][1].charAt(0));
-                    exe.set(i,tem);
+                    exe.set(i,insertVar(exe.get(i), parameters[j][0],parameters[j][1]));
                 }
             }
         }
@@ -98,5 +96,32 @@ public class Defun {
         Interpreter.mainDecoder(exe);
         System.out.println("----FUNCTION FINISHED RUNNING----");
         System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+");
+    }
+
+
+    public static String insertVar(String code, String var, String value){
+        String codeReplaced = "";
+        if(code.contains(" "+var+" ")){
+            String[] tem = code.split(" "+var+" ");
+            for(String st: tem){
+                codeReplaced+=(" "+value+" ");
+            }
+            code = codeReplaced;
+        }
+        if(code.contains("("+var+" ")){
+            String[] tem = code.split("("+var+" ");
+            for(String st: tem){
+                codeReplaced+=(" "+value+" ");
+            }
+            code = codeReplaced;
+        }
+        if(code.contains(" "+var+")")){
+            String[] tem = code.split(" "+var+")");
+            for(String st: tem){
+                codeReplaced+=(" "+value+" ");
+            }
+            code = codeReplaced;
+        }
+        return code;
     }
 }
