@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.Arrays;
 
 public class cond {
     /**
@@ -55,6 +56,34 @@ public class cond {
         }
         return stack.pop();
     }
+
+    //New version
+    public static int evaluateCommand(String expression) {
+        // Remove leading and trailing parentheses and split on spaces
+        String[] tokens = expression.substring(1, expression.length() - 1).split("\\s+");
+        // Find the index of the arrow (=>) symbol
+        int arrowIndex = -1;
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].equals("=>")) {
+                arrowIndex = i;
+                break;
+            }
+        }
+        if (arrowIndex == -1) {
+            throw new IllegalArgumentException("Arrow symbol (=>) not found in expression: " + expression);
+        }
+        // Evaluate the predicate and check if it is true
+        String predicate = String.join(" ", Arrays.copyOfRange(tokens, 1, arrowIndex));
+        if (evaluateConditional(predicate) == 1) {
+            // Evaluate the action and return the result
+            String action = String.join(" ", Arrays.copyOfRange(tokens, arrowIndex + 1, tokens.length));
+            return evaluateExpression(action);
+        } else {
+            // Predicate is false, return 0
+            return 0;
+        }
+    }
+    
     
 
     /**
@@ -67,6 +96,46 @@ public class cond {
 
 
     }
+
+    public static int evaluateExpression(String action) {
+        String[] tokens = action.split("\\s+");
+        Stack<Integer> stack = new Stack<>();
+        for (int i = tokens.length - 1; i >= 0; i--) {
+            String token = tokens[i];
+            if (Character.isDigit(token.charAt(0))) {
+                stack.push(Integer.parseInt(token));
+            } else if (isOperator(token)) {
+                int a = stack.pop();
+                int b = stack.pop();
+                switch (token) {
+                    case "+":
+                        stack.push(a + b);
+                        break;
+                    case "-":
+                        stack.push(a - b);
+                        break;
+                    case "*":
+                        stack.push(a * b);
+                        break;
+                    case "/":
+                        stack.push(a / b);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid operator: " + token);
+                }
+            } else if (token.equals("COND")) {
+                // handle COND expression separately
+                throw new IllegalArgumentException("COND expression not allowed in action");
+            } else {
+                throw new IllegalArgumentException("Invalid token: " + token);
+            }
+        }
+        if (stack.size() != 1) {
+            throw new IllegalArgumentException("Invalid expression: " + action);
+        }
+        return stack.pop();
+    }
+    
 
 
 }
