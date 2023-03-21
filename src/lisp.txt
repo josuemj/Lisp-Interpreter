@@ -1,6 +1,6 @@
 (+ 2 5)
-(defun example (x y z)
- (+ x y)
+(defun example (num y z)
+ (+ num y)
  (* y z))
 (example 2 30 6)
 (setq x 1)
