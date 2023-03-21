@@ -1,13 +1,4 @@
-import java.util.Stack;
-
-public class cond {
-    /**
-     * Evalúa una expresión condicional en notación prefix
-     * @param expression la expresión a evaluar
-     * @return el valor resultante de la evaluación de la condición
-     * @throws IllegalArgumentException si la expresión no es válida
-     */
-    public static int evaluateConditional(String expression) {
+public static int evaluateConditional(String expression) {
         String[] tokens = expression.split("\\s+");
         Stack<Integer> stack = new Stack<>();
         for (int i = tokens.length - 1; i >= 0; i--) {
@@ -35,14 +26,9 @@ public class cond {
                 int j = i + 2;
                 while (cases-- > 0) {
                     String cond = tokens[j++];
-                    if (cond.equals("ELSE")) { // special case for ELSE clause
-                        String value = tokens[j++];
+                    String value = tokens[j++];
+                    if (evaluateConditional(cond) == 1) {
                         return Integer.parseInt(value);
-                    } else {
-                        String value = tokens[j++];
-                        if (evaluateConditional(cond) == 1) {
-                            return Integer.parseInt(value);
-                        }
                     }
                 }
                 throw new IllegalArgumentException("No matching case found in COND expression");
@@ -55,18 +41,3 @@ public class cond {
         }
         return stack.pop();
     }
-    
-
-    /**
-     * Identifica si es una operación
-     * @param operator el operador a identificar
-     * @return true si el operador es válido, false de lo contrario
-     */
-    private static boolean isOperator(String operator) {
-        return operator.equals("<") || operator.equals(">") || operator.equals("EQUAL");
-
-
-    }
-
-
-}
