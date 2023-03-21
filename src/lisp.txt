@@ -8,7 +8,7 @@
 (list (23 43 4 4))
 (defun example (num y z)
  (+ num y)
- (* y z))
+ (* y z)
  (example 4 2 4))
 (example 2 30 6)
 (setq x 1)

@@ -93,6 +93,7 @@ public class Defun {
         Interpreter.mainDecoder(exe);
         System.out.println("----FUNCTION FINISHED RUNNING----");
         System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+");
+        System.out.println(savedFunctions.get(whichFunction(codeLine)).get(0));
     }
 
     /**
@@ -103,8 +104,12 @@ public class Defun {
      */
     public static void runFunction(String codeLine){
         ArrayList<String> exe = savedFunctions.get(whichFunction(codeLine));
+        for(int i = 0; i<exe.size();i++){
+            System.out.println(exe.get(i));
+        }
         int parameterNum = exe.get(0).split(" ").length;
-        System.out.println(parameterNum);
+
+        System.out.println(" Hay: "+parameterNum+" parametros.");
         String[][] parameters = new String[exe.get(0).length()][2];
         String[] instance = codeLine.split(" ");
         String[] parameterNames = exe.get(0).split(" ");
@@ -118,16 +123,12 @@ public class Defun {
         for( int i = 0; i<parameterNum; i++){
             System.out.println(parameters[i][0] + " "+ parameters[i][1]);
         }
-        exe.remove(0);
-        for (int i = 0; i<exe.size(); i++){
+        for (int i = 1; i<exe.size(); i++){
             for(int j = 0; j<parameterNum; j++){
                 if(exe.get(i).contains(parameters[j][0])){
                     exe.set(i,insertVar(exe.get(i), parameters[j][0],parameters[j][1]));
                 }
             }
-        }
-        for(String st: exe){
-            System.out.printf(st);
         }
         System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+");
         System.out.println("----FUNCTION IS RUNNING----");
