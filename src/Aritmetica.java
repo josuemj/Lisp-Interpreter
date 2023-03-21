@@ -130,6 +130,12 @@ public class Aritmetica {
         }
     }
 
+    /**
+     * Evalua prefix
+     * @param expr
+     * @return
+     */
+
     public double evaluatePrefixCond(String expr) {
         String[] tokens = expr.trim().split("\\s+");
         String operator = tokens[0];

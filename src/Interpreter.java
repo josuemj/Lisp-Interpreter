@@ -11,6 +11,12 @@ public class Interpreter {
     private static Stack<String> stack = new Stack<String>();
     private static ArrayList<String> defunLines = new ArrayList<>();
     private static boolean defunDetected = false;
+
+
+    /**
+     * Lee las lineas del array que proviene del reader.
+     * @param fullCode
+     */
     public static void mainDecoder(ArrayList<String> fullCode){
     
 

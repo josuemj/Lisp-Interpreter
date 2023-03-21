@@ -77,7 +77,12 @@ public class Predicates {
             //< method
         }
     }
-    
+
+    /**
+     * Evalua expresion.
+     * @param expression
+     * @return
+     */
     public static String evaluateExpression(String expression) {
         String[] tokens = expression.split(" ");
         Stack<String> stack = new Stack<>();
@@ -227,6 +232,12 @@ public class Predicates {
      * @return
      */
 
+    /**
+     * Detecta si es una lista.
+     * @param listDeclaration
+     * @return
+     */
+
     public static boolean isList(String listDeclaration){
         System.out.println("ANALYZING LIST");//???????
         System.out.println(listDeclaration);//????????
@@ -242,6 +253,11 @@ public class Predicates {
 
         return false;
     }
+
+    /**
+     * Corre el predicado de igual o "equals".
+     * @param codeLine
+     */
 
     public static void runEqual(String codeLine){
         try{
@@ -265,6 +281,12 @@ public class Predicates {
         }
     }
 
+    /**
+     * Predicate reading.
+     * @param predicate
+     * @return
+     */
+
     public static boolean evaluate(String predicate){
         String[] tokens = predicate.split(" ");
         String operator = tokens[0];
@@ -283,6 +305,11 @@ public class Predicates {
         }
     }
 
+
+    /**
+     * Cond
+     * @param codeLine
+     */
     public static void runPredicateCond(String codeLine) {
         Aritmetica Aritmetica = new Aritmetica();
         // Remove the "cond" keyword and split the remaining code by "=>" operator

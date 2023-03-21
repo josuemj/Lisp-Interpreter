@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Reader {
+
+    /**
+     * Lee el archivo txt que contiene el codigo.
+     * @return
+     */
     public static ArrayList<String> Read(){
         ArrayList<String> codigo = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader("src/lisp.txt"))) {
