@@ -1,0 +1,7 @@
+a) operaciones aritméticas,
+b) instrucción QUOTE o ‘ (single quote, para interrumpir el proceso de evaluación de expresiones)
+c) definición de funciones (DEFUN),
+d) SETQ
+e) predicados (ATOM, LIST, EQUAL, <, >),
+f) condicionales (COND), nota: no es necesario implementar IF
+g) paso de parámetros. (un parámetro puede ser incluso una función)
